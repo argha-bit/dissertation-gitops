@@ -18,3 +18,23 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: routes
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/argha-bit/dissertation-gitops.git
+    path: gateway-config/routes
+    targetRevision: master
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-namespace
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
