@@ -15,9 +15,6 @@ spec:
   ignoreDifferences:
   - group: gateway.networking.k8s.io
     kind: GatewayClass
-    jsonPointers:
-    - /spec/parametersRef
-    - /metadata/labels
   syncPolicy:
     automated:
       prune: true
