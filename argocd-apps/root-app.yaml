@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/argha-bit/dissertation-gitops.git
     path: argocd-apps
-    targetRevision: main
+    targetRevision: master
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

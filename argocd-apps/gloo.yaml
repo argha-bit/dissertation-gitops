@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/argha-bit/dissertation-gitops.git
     path: helm/gloo
-    targetRevision: main
+    targetRevision: master
   destination:
     server: https://kubernetes.default.svc
     namespace: my-namespace
