@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/argha-bit/dissertation-gitops.git
     path: gateway-config
     targetRevision: master
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: my-namespace
