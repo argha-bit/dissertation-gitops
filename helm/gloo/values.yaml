@@ -1,0 +1,5 @@
+gloo:
+  kubeGateway:
+    enabled: true
+  gloo:
+    disableLeaderElection: true
