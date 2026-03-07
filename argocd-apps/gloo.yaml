@@ -12,6 +12,12 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: my-namespace
+  ignoreDifferences:
+  - group: gateway.networking.k8s.io
+    kind: GatewayClass
+    jsonPointers:
+    - /spec/parametersRef
+    - /metadata/labels
   syncPolicy:
     automated:
       prune: true
