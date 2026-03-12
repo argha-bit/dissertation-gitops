@@ -13,6 +13,8 @@ spec:
       labels:
         app: arctic-wolf-risk-manager-app
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: arc
         image: arctic-wold-risk-manager:latest
