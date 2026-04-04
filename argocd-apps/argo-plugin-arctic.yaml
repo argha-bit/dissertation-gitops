@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL:  https://github.com/argha-bit/dissertation-gitops.git # Your config repo
-    targetRevision: HEAD
+    targetRevision: master
     path: plugin-routes # The folder containing your governor-config.yaml
     # THIS CONNECTS TO YOUR SIDECAR
     plugin:
