@@ -1,0 +1,16 @@
+serviceId: "auth-svc-99"
+serviceName: "identity-manager"
+teamName: "platform-security"
+
+# Destination and Communication
+namespace: "prod-auth"
+contactEmail: "security-ops@company.com"
+configEndpoint: http://host.minikube.internal:3000/routes
+webhookUrl: "http://the-governor.svc.cluster.local/webhooks"
+
+# Metadata (The JSONMap field)
+metadata:
+  tier: "critical"
+  region: "us-east-1"
+  pciCompliant: "true"
+  version: "v2.0.4"

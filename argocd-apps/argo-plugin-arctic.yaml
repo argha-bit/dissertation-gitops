@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: governor-managed-routes
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL:  https://github.com/argha-bit/dissertation-gitops.git # Your config repo
+    targetRevision: HEAD
+    path: plugin-routes # The folder containing your governor-config.yaml
+    # THIS CONNECTS TO YOUR SIDECAR
+    plugin:
+      name: the-governor 
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-namespace # Where you want the HTTPRoutes to land
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
