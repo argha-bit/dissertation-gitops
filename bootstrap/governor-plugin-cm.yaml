@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: the-governor-plugin
+  namespace: argocd
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: the-governor
+    spec:
+      generate:
+        command: ["/code/the-governor"]
+        args: ["--engine=ARGO_PLUGIN", "--service=generator"]
+      discover:
+        # Argo CD triggers this plugin ONLY if it finds this file in a folder
+        find:
+          glob: "**/governor-config.yaml"
