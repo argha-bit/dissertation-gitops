@@ -1,0 +1,10 @@
+apiVersion: governor.io/v1alpha1
+kind: GovernorRoute
+metadata:
+  name: governor-service
+  namespace: my-namespace
+spec:
+  serviceName: governor-service
+  teamName: platform-team
+  namespace: my-namespace
+  configEndpoint: http://host.minikube.internal:3000/operator/routes
