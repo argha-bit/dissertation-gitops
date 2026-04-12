@@ -1,0 +1,13 @@
+name: governor-operator
+namespace: my-namespace
+
+image:
+  repository: ghcr.io/argha-bit/the-governor
+  tag: operator-latest
+  pullPolicy: Always
+
+operator:
+  deploymentKind: IN_CLUSTER
+
+imagePullSecrets:
+  - name: ghcr-secret
