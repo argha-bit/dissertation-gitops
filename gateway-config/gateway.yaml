@@ -8,7 +8,7 @@ spec:
   listeners:
   - name: http
     protocol: HTTP
-    port: 8080
+    port: 8080 #LDS
     allowedRoutes:
       namespaces:
         from: All

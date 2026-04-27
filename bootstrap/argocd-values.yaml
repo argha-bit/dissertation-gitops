@@ -1,0 +1,26 @@
+repoServer:
+  imagePullSecrets:
+    - name: ghcr-secret
+  volumes:
+    - name: governor-plugin-config
+      configMap:
+        defaultMode: 420
+        name: the-governor-plugin
+  extraContainers:
+    - name: the-governor
+      image: ghcr.io/argha-bit/the-governor:latest
+      imagePullPolicy: Always
+      command: [/var/run/argocd/argocd-cmp-server]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+      volumeMounts:
+        - mountPath: /var/run/argocd
+          name: var-files
+        - mountPath: /home/argocd/cmp-server/plugins
+          name: plugins
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          name: governor-plugin-config
+          subPath: plugin.yaml

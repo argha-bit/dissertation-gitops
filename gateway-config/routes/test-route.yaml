@@ -9,6 +9,7 @@ spec:
   parentRefs:
   - name: test-gateway
     namespace: my-namespace
+# RDS
   hostnames:
   - "test.local"
   rules:
@@ -21,6 +22,7 @@ spec:
       port: 8080
 
 ---
+#RDS
 apiVersion: gateway.solo.io/v1
 kind: RouteOption
 metadata:
