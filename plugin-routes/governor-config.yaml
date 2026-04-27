@@ -5,7 +5,7 @@ teamName: "platform-security"
 # Destination and Communication
 namespace: "prod-auth"
 contactEmail: "security-ops@company.com"
-configEndpoint: http://host.minikube.internal:3000/operator/routes
+configEndpoint: http://host.minikube.internal:3000/webserver/routes
 webhookUrl: "http://the-governor.svc.cluster.local/webhooks"
 
 # Metadata (The JSONMap field)
