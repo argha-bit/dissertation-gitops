@@ -1,45 +1,87 @@
 # Gateway API resources for testing
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: test-route
-  namespace: my-namespace
-spec:
-  parentRefs:
-  - name: test-gateway
-    namespace: my-namespace
-# RDS
-  hostnames:
-  - "test.local"
-  rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    backendRefs:
-    - name: test-app
-      port: 8080
+# ---
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#   name: test-route
+#   namespace: my-namespace
+# spec:
+#   parentRefs:
+#   - name: test-gateway
+#     namespace: my-namespace
+# # RDS
+#   hostnames:
+#   - "test.local"
+#   rules:
+#   - matches:
+#     - path:
+#         type: PathPrefix
+#         value: /
+#     backendRefs:
+#     - name: test-app
+#       port: 8080
+
+# ---
+# #RDS
+# apiVersion: gateway.solo.io/v1
+# kind: RouteOption
+# metadata:
+#   name: add-headers
+#   namespace: my-namespace
+# spec:
+#   targetRefs:
+#   - group: gateway.networking.k8s.io
+#     kind: HTTPRoute
+#     name: test-route
+#   options:
+#     headerManipulation:
+#       requestHeadersToAdd:
+#       - header:
+#           key: x-custom-header
+#           value: my-value
+#       responseHeadersToAdd:
+#       - header:
+#           key: x-response-header
+#           value: added-by-gloo
 
 ---
-#RDS
-apiVersion: gateway.solo.io/v1
-kind: RouteOption
+# Gloo Edge resources for testing VirtualService + Upstream
+apiVersion: gloo.solo.io/v1
+kind: Upstream
 metadata:
-  name: add-headers
+  name: test-app-8080
   namespace: my-namespace
 spec:
-  targetRefs:
-  - group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    name: test-route
-  options:
-    headerManipulation:
-      requestHeadersToAdd:
-      - header:
-          key: x-custom-header
-          value: my-value
-      responseHeadersToAdd:
-      - header:
-          key: x-response-header
-          value: added-by-gloo
+  kube:
+    serviceName: test-app
+    serviceNamespace: my-namespace
+    servicePort: 8080
+
+---
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: test-route-vs
+  namespace: my-namespace
+spec:
+  virtualHost:
+    domains:
+    - test.local
+    routes:
+    - matchers:
+      - prefix: /
+      routeAction:
+        single:
+          upstream:
+            name: test-app-8080
+            namespace: my-namespace
+      options:
+        headerManipulation:
+          requestHeadersToAdd:
+          - header:
+              key: x-custom-header
+              value: my-value
+          responseHeadersToAdd:
+          - header:
+              key: x-response-header
+              value: added-by-gloo
