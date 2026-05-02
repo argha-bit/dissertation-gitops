@@ -32,3 +32,23 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - gateway.solo.io
+  resources:
+  - virtualservices
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+- apiGroups:
+  - gloo.solo.io
+  resources:
+  - upstreams
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
