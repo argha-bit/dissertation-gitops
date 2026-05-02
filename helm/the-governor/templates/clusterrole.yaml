@@ -36,6 +36,7 @@ rules:
   - gateway.solo.io
   resources:
   - virtualservices
+  - routetables      
   verbs:
   - create
   - delete
