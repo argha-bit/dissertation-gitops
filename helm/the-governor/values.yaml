@@ -3,7 +3,7 @@ namespace: my-namespace
 
 image:
   repository: ghcr.io/argha-bit/the-governor
-  tag: operator-beta
+  tag: beta-3.0
   pullPolicy: Always
 
 operator:

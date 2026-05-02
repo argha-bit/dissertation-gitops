@@ -8,7 +8,7 @@ repoServer:
         name: the-governor-plugin
   extraContainers:
     - name: the-governor
-      image: ghcr.io/argha-bit/the-governor:operator-beta
+      image: ghcr.io/argha-bit/the-governor:beta-3.0
       imagePullPolicy: Always
       command: [/var/run/argocd/argocd-cmp-server]
       securityContext:
