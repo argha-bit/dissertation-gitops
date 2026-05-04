@@ -1,0 +1,34 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: gloo-resource-rollout-cleanup-watch
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: gloo
+    app.kubernetes.io/instance: {{ .Release.Name }}
+rules:
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gloo-resource-rollout-cleanup-watch
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: gloo
+    app.kubernetes.io/instance: {{ .Release.Name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: gloo-resource-rollout-cleanup-watch
+subjects:
+- kind: ServiceAccount
+  name: gloo-resource-rollout-cleanup
+  namespace: {{ .Release.Namespace }}
